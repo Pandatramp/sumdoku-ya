@@ -227,7 +227,7 @@ window.SudokuGen = {
     // Уровень 100+: 5 начальных цифр (эксперт)
     const targetFilled = Math.max(5, 25 - Math.floor(levelIndex / 3));
 
-    const MAX_ATTEMPTS = 5;
+    const MAX_ATTEMPTS = 3;
 
     for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
       // 1. Генерируем полное валидное решение
