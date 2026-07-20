@@ -15,11 +15,11 @@ body.loaded #app { visibility: visible; }
   --hl-cage: #f3e5f5;   /* ✅ ДОБАВИТЬ — светло-сиреневый для клетки */
 }
 body.dark-theme {
-  --bg: #1a1a2e; --board-bg: #16213e; --border: #555; --box-border: #888;
-  --cell-bg: #0f3460; --cell-hover: #1a4a7a; --selected: #1a5f7a;
+  --bg: #1a1a2e; --board-bg: #141428; --border: #555; --box-border: #888;
+  --cell-bg: #181830; --cell-hover: #1a4a7a; --selected: #52275a;
   --given: #4fc3f7; --user: #81d4fa; --note: #90a4ae; --text: #e0e0e0;
-  --hl-row: #0a192f; --hl-col: #0a192f; --hl-box: #0a192f; --hl-num: #2563eb;
-  --hl-cage: #2a1a3e;   /* ✅ ДОБАВИТЬ — тёмно-фиолетовый для клетки */
+  --hl-row: #010344; --hl-col: #010344; --hl-box: #010344; --hl-num: #52275a;
+  --hl-cage: #251343;   /* ✅ ДОБАВИТЬ — тёмно-фиолетовый для клетки */
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 html { height: 100%; min-height: 100vh; min-height: 100dvh; width: 100%; max-width: 100%; overflow-x: hidden; }
@@ -100,10 +100,10 @@ body.dark-theme #app::before { background: radial-gradient(circle at 10% 10%, rg
   );
 }
 
-.cage-border-indicator.cage-border-top    { border-top:    2px dashed var(--box-border); }
-.cage-border-indicator.cage-border-right  { border-right:  2px dashed var(--box-border); }
-.cage-border-indicator.cage-border-bottom { border-bottom: 2px dashed var(--box-border); }
-.cage-border-indicator.cage-border-left   { border-left:   2px dashed var(--box-border); }
+.cage-border-indicator.cage-border-top    { border-top:    1px dashed var(--box-border); }
+.cage-border-indicator.cage-border-right  { border-right:  1px dashed var(--box-border); }
+.cage-border-indicator.cage-border-bottom { border-bottom: 1px dashed var(--box-border); }
+.cage-border-indicator.cage-border-left   { border-left:   1px dashed var(--box-border); }
 
 /* ✅ Уголки клетки — соединяют пунктирные линии в углах */
 /* ✅ Уголки клетки — уменьшены до 4×4px для стыковки с пунктирными линиями */
@@ -118,26 +118,26 @@ body.dark-theme #app::before { background: radial-gradient(circle at 10% 10%, rg
 .cage-corner-br {
   bottom: 0.5px;
   right: 0.5px;
-  border-left: 2px dashed var(--border);
-  border-top: 2px dashed var(--border);
+  border-left: 1px dashed var(--border);
+  border-top: 1px dashed var(--border);
 }
 .cage-corner-bl {
   bottom: 0.5px;
   left: 0.5px;
-  border-right: 2px dashed var(--border);
-  border-top: 2px dashed var(--border);
+  border-right: 1px dashed var(--border);
+  border-top: 1px dashed var(--border);
 }
 .cage-corner-tr {
   top: 0.5px;
   right: 0.5px;
-  border-left: 2px dashed var(--border);
-  border-bottom: 2px dashed var(--border);
+  border-left: 1px dashed var(--border);
+  border-bottom: 1px dashed var(--border);
 }
 .cage-corner-tl {
   top: 0.5px;
   left: 0.5px;
-  border-right: 2px dashed var(--border);
-  border-bottom: 2px dashed var(--border);
+  border-right: 1px dashed var(--border);
+  border-bottom: 1px dashed var(--border);
 }
 
 body.dark-theme .cage-corner {
