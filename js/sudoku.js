@@ -156,11 +156,12 @@ window.SudokuGen = {
     for (let r = 0; r < 9; r++) for (let c = 0; c < 9; c++) unassigned.add(r * 9 + c);
 
     // 🔹 Плавный рост сложности: чем выше уровень — тем больше клетки
+        // 🔹 Плавный рост сложности: чем выше уровень — тем больше клетки
     const difficultyFactor = Math.min(1, levelIndex / 50);
-    const smallChance = 0.15 - difficultyFactor * 0.1;   // 15% → 5%
-    const mediumChance = 0.40;                             // 40%
-    const largeChance = 0.37 + difficultyFactor * 0.1;    // 37% → 47%
-    const hugeChance = 0.08 + difficultyFactor * 0.08;    // 8% → 16%
+    const smallChance = 0.30 - difficultyFactor * 0.15;   // 🔹 30% → 15% (было 15% → 5%)
+    const mediumChance = 0.45;                             // 🔹 45% (было 40%)
+    const largeChance = 0.20 + difficultyFactor * 0.15;    // 🔹 20% → 35% (было 37% → 47%)
+    const hugeChance = 0.05 + difficultyFactor * 0.05;     // 🔹 5% → 10% (было 8% → 16%)
 
     const targetSize = () => {
       const v = rand();
