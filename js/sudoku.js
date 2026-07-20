@@ -10,7 +10,7 @@ window.SudokuGen = {
     };
   },
 
-  // Проверка: можно ли поставить num в ячейку (стандартные правила судоку)
+  // Проверка: можно ли поставить num в ячейку
   isValid(board, row, col, num) {
     for (let x = 0; x < 9; x++) {
       if (board[row][x] === num) return false;
@@ -26,7 +26,7 @@ window.SudokuGen = {
     return true;
   },
 
-  // Решатель классического судоку (для генерации полного решения)
+  // Решатель классического судоку
   solve(board, rand) {
     for (let row = 0; row < 9; row++) {
       for (let col = 0; col < 9; col++) {
@@ -53,9 +53,7 @@ window.SudokuGen = {
   },
 
   // 🔹 РЕШАТЕЛЬ KILLER SUDOKU — считает количество решений
-  // Учитывает: строки, столбцы, блоки 3×3, суммы клеток, уникальность в клетках
-  countKillerSolutions(cages, limit = 2) {
-    // Подготовка: карта "ячейка → клетка"
+  countKillerSolutions(cages, puzzle, limit = 2) {
     const cageMap = new Array(81);
     cages.forEach(cage => {
       cage.cells.forEach(cell => {
@@ -63,21 +61,24 @@ window.SudokuGen = {
       });
     });
 
-    // Доска: 81 ячейка, 0 = пусто
     const board = new Array(81).fill(0);
+    // Копируем начальные значения из puzzle
+    for (let r = 0; r < 9; r++) {
+      for (let c = 0; c < 9; c++) {
+        board[r * 9 + c] = puzzle[r][c];
+      }
+    }
+
     const count = { value: 0 };
 
-    // 🔹 Рекурсивный решатель с отсечениями
     const solve = () => {
       if (count.value >= limit) return;
 
-      // Находим первую пустую ячейку
       let emptyIdx = -1;
       for (let i = 0; i < 81; i++) {
         if (board[i] === 0) { emptyIdx = i; break; }
       }
       if (emptyIdx === -1) {
-        // Все ячейки заполнены — проверяем суммы
         let valid = true;
         for (const cage of cages) {
           let sum = 0;
@@ -94,7 +95,6 @@ window.SudokuGen = {
       const c = emptyIdx % 9;
       const cage = cageMap[emptyIdx];
 
-      // 🔹 Считаем текущее состояние клетки
       let currentSum = 0;
       let emptyInCage = 0;
       const usedInCage = new Set();
@@ -108,27 +108,20 @@ window.SudokuGen = {
         }
       }
 
-      // 🔹 Перебираем цифры 1-9
       for (let num = 1; num <= 9; num++) {
-        // Отсечение 1: цифра не должна повторяться в клетке
         if (usedInCage.has(num)) continue;
-
-        // Отсечение 2: сумма не должна превышать target
         if (currentSum + num > cage.sum) continue;
 
-        // Отсечение 3: минимально возможные оставшиеся цифры
         const minRemaining = emptyInCage > 1
           ? Array.from({ length: emptyInCage - 1 }, (_, i) => i + 1).reduce((a, b) => a + b, 0)
           : 0;
         if (currentSum + num + minRemaining > cage.sum) continue;
 
-        // Отсечение 4: максимально возможные оставшиеся цифры
         const maxRemaining = emptyInCage > 1
           ? Array.from({ length: emptyInCage - 1 }, (_, i) => 9 - i).reduce((a, b) => a + b, 0)
           : 0;
         if (currentSum + num + maxRemaining < cage.sum) continue;
 
-        // Отсечение 5: стандартные правила судоку
         if (!this.isValid(board, r, c, num)) continue;
 
         board[emptyIdx] = num;
@@ -144,7 +137,7 @@ window.SudokuGen = {
   },
 
   // 🔹 Генерация клеток (cages) — region-growing
-  generateCages(solution, rand, levelIndex) {
+  generateCages(solution, rand) {
     const assigned = Array.from({ length: 9 }, () => Array(9).fill(-1));
     const cages = [];
     let cageId = 0;
@@ -155,33 +148,13 @@ window.SudokuGen = {
     const unassigned = new Set();
     for (let r = 0; r < 9; r++) for (let c = 0; c < 9; c++) unassigned.add(r * 9 + c);
 
-    // 🔹 Плавный рост сложности: чем выше уровень — тем больше клетки
-        // 🔹 Плавный рост сложности: чем выше уровень — тем больше клетки
-    // 🔹 Плавный рост сложности: чем выше уровень — тем больше клетки
-    const difficultyFactor = Math.min(1, levelIndex / 50);
-
-    // 🔹 Клетки размером 1 (одиночные ячейки) — очень легко, только на старте
-    const tinyChance = Math.max(0, 0.08 - difficultyFactor * 0.08);   // 🔹 8% → 0%
-
-    // 🔹 Маленькие клетки (размер 2) — много на старте
-    const smallChance = 0.45 - difficultyFactor * 0.25;               // 🔹 45% → 20%
-
-    // 🔹 Средние клетки (размер 3)
-    const mediumChance = 0.35;                                         // 🔹 35%
-
-    // 🔹 Большие клетки (размер 4)
-    const largeChance = 0.10 + difficultyFactor * 0.20;                // 🔹 10% → 30%
-
-    // 🔹 Очень большие клетки (размер 5)
-    const hugeChance = 0.02 + difficultyFactor * 0.10;                 // 🔹 2% → 12%
-
+    // 🔹 Возвращаем старую формулу (без tinyChance)
     const targetSize = () => {
-    const v = rand();
-    if (v < tinyChance) return 1;                                    // 🔹 НОВОЕ: клетки размером 1
-    if (v < tinyChance + smallChance) return 2;
-    if (v < tinyChance + smallChance + mediumChance) return 3;
-    if (v < tinyChance + smallChance + mediumChance + largeChance) return 4;
-    return 5;
+      const v = rand();
+      if (v < 0.15) return 2;
+      if (v < 0.55) return 3;
+      if (v < 0.92) return 4;
+      return 5;
     };
 
     while (unassigned.size > 0) {
@@ -243,12 +216,17 @@ window.SudokuGen = {
     return cages;
   },
 
-  // 🔹 ГЛАВНАЯ ФУНКЦИЯ: генерация уровня с проверкой единственности
+  // 🔹 ГЛАВНАЯ ФУНКЦИЯ: генерация уровня с заполнением ячеек
   generatePuzzle(levelIndex) {
     const seed = levelIndex * 7919 + 104729;
     const rand = this.createSeededRandom(seed);
 
-    // 🔹 Максимум попыток для поиска уникального уровня
+    // 🔹 Формула количества начальных цифр (плавное усложнение)
+    // Уровень 1: 25 начальных цифр (очень легко)
+    // Уровень 50: 8 начальных цифр (сложно)
+    // Уровень 100+: 5 начальных цифр (эксперт)
+    const targetFilled = Math.max(5, 25 - Math.floor(levelIndex / 3));
+
     const MAX_ATTEMPTS = 5;
 
     for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
@@ -267,14 +245,33 @@ window.SudokuGen = {
       const solution = board.map(row => [...row]);
 
       // 2. Генерируем клетки (cages)
-      const cages = this.generateCages(solution, rand, levelIndex);
+      const cages = this.generateCages(solution, rand);
 
-      // 3. 🔹 ПРОВЕРКА ЕДИНСТВЕННОСТИ РЕШЕНИЯ
-      const solutionCount = this.countKillerSolutions(cages, 2);
+      // 3. 🔹 Заполняем начальные цифры
+      const puzzle = Array.from({ length: 9 }, () => Array(9).fill(0));
+      const cells = [];
+      for (let r = 0; r < 9; r++) {
+        for (let c = 0; c < 9; c++) {
+          cells.push({ r, c });
+        }
+      }
+      // Перемешиваем ячейки
+      for (let i = cells.length - 1; i > 0; i--) {
+        const j = Math.floor(rand() * (i + 1));
+        [cells[i], cells[j]] = [cells[j], cells[i]];
+      }
+
+      // Заполняем targetFilled ячеек
+      for (let i = 0; i < Math.min(targetFilled, cells.length); i++) {
+        const { r, c } = cells[i];
+        puzzle[r][c] = solution[r][c];
+      }
+
+      // 4. 🔹 ПРОВЕРКА ЕДИНСТВЕННОСТИ РЕШЕНИЯ
+      const solutionCount = this.countKillerSolutions(cages, puzzle, 2);
 
       if (solutionCount === 1) {
         // ✅ Единственное решение — возвращаем уровень
-        const puzzle = Array.from({ length: 9 }, () => Array(9).fill(0));
         return { puzzle, solution, cages };
       }
 
@@ -282,10 +279,9 @@ window.SudokuGen = {
       console.warn(`⚠️ Уровень ${levelIndex}, попытка ${attempt + 1}: решений ${solutionCount}`);
     }
 
-    // 🔹 Если не удалось за MAX_ATTEMPTS — возвращаем последний вариант с предупреждением
+    // 🔹 Фоллбэк: возвращаем последний вариант
     console.warn(`⚠️ Уровень ${levelIndex}: не удалось найти уникальное решение за ${MAX_ATTEMPTS} попыток`);
     
-    // Фоллбэк: генерируем без проверки
     const board = Array.from({ length: 9 }, () => Array(9).fill(0));
     for (let i = 0; i < 9; i += 3) {
       const nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -298,8 +294,24 @@ window.SudokuGen = {
     }
     this.solve(board, rand);
     const solution = board.map(row => [...row]);
-    const cages = this.generateCages(solution, rand, levelIndex);
+    const cages = this.generateCages(solution, rand);
+    
     const puzzle = Array.from({ length: 9 }, () => Array(9).fill(0));
+    const cells = [];
+    for (let r = 0; r < 9; r++) {
+      for (let c = 0; c < 9; c++) {
+        cells.push({ r, c });
+      }
+    }
+    for (let i = cells.length - 1; i > 0; i--) {
+      const j = Math.floor(rand() * (i + 1));
+      [cells[i], cells[j]] = [cells[j], cells[i]];
+    }
+    for (let i = 0; i < Math.min(targetFilled, cells.length); i++) {
+      const { r, c } = cells[i];
+      puzzle[r][c] = solution[r][c];
+    }
+    
     return { puzzle, solution, cages };
   }
 };
