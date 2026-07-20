@@ -157,18 +157,31 @@ window.SudokuGen = {
 
     // 🔹 Плавный рост сложности: чем выше уровень — тем больше клетки
         // 🔹 Плавный рост сложности: чем выше уровень — тем больше клетки
+    // 🔹 Плавный рост сложности: чем выше уровень — тем больше клетки
     const difficultyFactor = Math.min(1, levelIndex / 50);
-    const smallChance = 0.30 - difficultyFactor * 0.15;   // 🔹 30% → 15% (было 15% → 5%)
-    const mediumChance = 0.45;                             // 🔹 45% (было 40%)
-    const largeChance = 0.20 + difficultyFactor * 0.15;    // 🔹 20% → 35% (было 37% → 47%)
-    const hugeChance = 0.05 + difficultyFactor * 0.05;     // 🔹 5% → 10% (было 8% → 16%)
+
+    // 🔹 Клетки размером 1 (одиночные ячейки) — очень легко, только на старте
+    const tinyChance = Math.max(0, 0.08 - difficultyFactor * 0.08);   // 🔹 8% → 0%
+
+    // 🔹 Маленькие клетки (размер 2) — много на старте
+    const smallChance = 0.45 - difficultyFactor * 0.25;               // 🔹 45% → 20%
+
+    // 🔹 Средние клетки (размер 3)
+    const mediumChance = 0.35;                                         // 🔹 35%
+
+    // 🔹 Большие клетки (размер 4)
+    const largeChance = 0.10 + difficultyFactor * 0.20;                // 🔹 10% → 30%
+
+    // 🔹 Очень большие клетки (размер 5)
+    const hugeChance = 0.02 + difficultyFactor * 0.10;                 // 🔹 2% → 12%
 
     const targetSize = () => {
-      const v = rand();
-      if (v < smallChance) return 2;
-      if (v < smallChance + mediumChance) return 3;
-      if (v < smallChance + mediumChance + largeChance) return 4;
-      return 5;
+    const v = rand();
+    if (v < tinyChance) return 1;                                    // 🔹 НОВОЕ: клетки размером 1
+    if (v < tinyChance + smallChance) return 2;
+    if (v < tinyChance + smallChance + mediumChance) return 3;
+    if (v < tinyChance + smallChance + mediumChance + largeChance) return 4;
+    return 5;
     };
 
     while (unassigned.size > 0) {
