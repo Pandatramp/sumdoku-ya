@@ -28,12 +28,12 @@ window.Game = {
             settingHighlight: "✨ Подсветка",
             settingDark: "🌙 Тёмная тема",
             settingDone: "✓ Готово",
-            rulesTitle: "📖 Правила Сумдоку",
+            rulesTitle: "📖 Правила Судоку Киллер",
             rulesBack: "⬅ В меню",
-            rulesContent: `🎯 <b>Цель игры:</b><br>Заполни поле 9×9 цифрами от 1 до 9 так, чтобы:<br>• в каждой строке,<br>• в каждом столбце,<br>• в каждом блоке 3×3,<br>• и в каждой пунктирной области —<br>каждая цифра встречалась только один раз.<br><br>🔢 <b>Суммы:</b><br>В углу каждой пунктирной области указана сумма цифр в ней. Цифры внутри области не должны повторяться.<br><br>✏️ <b>Заметки:</b><br>Включив этот режим, можно заполнять ячейки несколькими цифрами сразу.<br><br>💡 <b>Помощь:</b><br>Исправление ошибки. Если ошибок нет, то заполняется пустая ячейка.<br><br>↩️ <b>Отмена:</b><br>Отмена последнего действия.<br><br>✨ <b>Подсветка:</b><br>При выделении ячейки подсвечиваются строка, столбец, блок 3×3, пунктирная область и все ячейки с таким же значением.`,            
+            rulesContent: `🎯 <b>Цель игры:</b><br>Заполни поле 9×9 цифрами от 1 до 9 так, чтобы в каждой строке, в каждом столбце, в каждом блоке 3×3 и в каждой пунктирной области — каждая цифра встречалась только один раз.<br><br>🔢 <b>Суммы:</b><br>В углу каждой пунктирной области указана сумма цифр в ней. Цифры внутри области не должны повторяться.<br><br>✏️ <b>Заметки:</b><br>Включив этот режим, можно заполнять ячейки несколькими цифрами сразу.<br><br>💡 <b>Помощь:</b><br>Исправление ошибки. Если ошибок нет, то заполняется пустая ячейка.<br><br>↩️ <b>Отмена:</b><br>Отмена последнего действия.`,            
             infoTitle: "ℹ️ Информация",
             infoBack: "⬅ В меню",
-            infoContent: "Спасибо, что играете в эту игру!<br><br>Я очень люблю судоку и постарался добавить сюда всё, что мне нравилось в подобных играх, и убрать то, что доставляло неудобства.<br><br>Если у вас есть вопросы, предложения или вы нашли ошибку — напишите мне:<br> pandagdev@outlook.com<br><br>Или в одной из соцсетей, указанных на странице игры.<br><br><small style='opacity: 0.7'>Версия: 1.0 (Сумдоку)</small>",
+            infoContent: "Спасибо, что играете в эту игру!<br><br>Я очень люблю судоку и постарался добавить сюда всё, что мне нравилось в подобных играх, и убрать то, что доставляло неудобства.<br><br>Если у вас есть вопросы, предложения или вы нашли ошибку — напишите мне:<br> pandagdev@outlook.com<br><br><small style='opacity: 0.7'>Версия: 1.0 (Судоку Киллер)</small>",
             controlsTitle: "🎮 Управление",
             controlsBack: "⬅ В меню",
             restartTitle: "Перезапуск уровня",
@@ -52,8 +52,8 @@ window.Game = {
             undoLabel: "Отмена",
             alertNoHints: "⚠️ Подсказки закончились!",
             levelPrefix: "Уровень:",
-            menuTitle: "Сумдоку",
-            menuSubtitle: "Классика",
+            menuTitle: "Судоку",
+            menuSubtitle: "Киллер",
             menuSubtitle2: "Бесконечные уровни",
             hintAdTitle: "Подсказка за рекламу",
             hintAdText: "У вас не осталось подсказок.<br>Добавить подсказку за просмотр рекламы?",
@@ -84,12 +84,11 @@ window.Game = {
             settingHighlight: "✨ Highlight",
             settingDark: "🌙 Dark Theme",
             settingDone: "✓ Done",
-            rulesTitle: "📖 Sumdoku Rules",
+            rulesTitle: "📖 Sudoku Killer Rules",
             rulesBack: "⬅ Back",
-            rulesContent: `🎯 <b>How to Play</b><br>Fill the 9×9 grid with numbers from 1 to 9 so that:<br>• each row,<br>• each column,<br>• each 3×3 box,<br>• and each dashed cage —<br>contains each digit exactly once.<br><br>🔢 <b>Sums:</b><br>Each dashed cage has a sum shown in its corner. Digits within a cage must not repeat.<br><br>✏️ <b>Notes:</b><br>In this mode, you can add multiple candidate numbers to a single cell.<br><br>💡 <b>Hint:</b><br>Corrects a mistake. If there are no mistakes, it fills in an empty cell.<br><br>↩️ <b>Undo:</b><br>Undo your last move.<br><br>✨ <b>Highlight:</b><br>When you select a cell, it highlights its row, column, 3×3 box, cage, and all cells with the same number.`,            
-            infoTitle: "ℹ️ Info",
+            rulesContent: `🎯 <b>How to Play</b><br>Fill the 9×9 grid with numbers from 1 to 9 so that  each row, each column, each 3×3 box and each dashed cage — contains each digit exactly once.<br><br>🔢 <b>Sums:</b><br>Each dashed cage has a sum shown in its corner. Digits within a cage must not repeat.<br><br>✏️ <b>Notes:</b><br>In this mode, you can add multiple candidate numbers to a single cell.<br><br>💡 <b>Hint:</b><br>Corrects a mistake. If there are no mistakes, it fills in an empty cell.<br><br>↩️ <b>Undo:</b><br>Undo your last move.`,                        infoTitle: "ℹ️ Info",
             infoBack: "⬅ Back",
-            infoContent: "Thanks for playing this game!<br><br>I really love sudoku, so I've tried to include everything I've enjoyed in similar games, while removing the things that felt annoying.<br><br>If you have any questions, suggestions, or if you've found a bug — feel free to email me:<br>📧 pandagdev@outlook.com<br><br>Or reach out via social media links on the game's page.<br><br><small style='opacity: 0.7'>Version: 1.0 (Sumdoku)</small>",
+            infoContent: "Thanks for playing this game!<br><br>I really love sudoku, so I've tried to include everything I've enjoyed in similar games, while removing the things that felt annoying.<br><br>If you have any questions, suggestions, or if you've found a bug — feel free to email me:<br>📧 pandagdev@outlook.com<br><br><small style='opacity: 0.7'>Version: 1.0 (Sudoku Killer)</small>",
             controlsTitle: "🎮 Controls",
             controlsBack: "⬅ Back",
             restartTitle: "Restart Level",
@@ -108,8 +107,8 @@ window.Game = {
             undoLabel: "Undo",
             alertNoHints: "⚠️ No hints left!",
             levelPrefix: "Level:",
-            menuTitle: "Sumdoku",
-            menuSubtitle: "Classic",
+            menuTitle: "Sudoku",
+            menuSubtitle: "Killer",
             menuSubtitle2: "Infinite Levels",
             hintAdTitle: "Hint for Ad",
             hintAdText: "No hints left.<br>Watch an ad to get one?",
@@ -574,7 +573,8 @@ window.Game = {
     },
 
     async startLevel() {
-        const { puzzle, solution, cages } = SudokuGen.generatePuzzle(this.state.level);
+        const levelIndex = this.state.level - 1;
+        const { puzzle, solution, cages } = window.KILLER_LEVELS[levelIndex] || SudokuGen.generatePuzzle(this.state.level);
         this.state.puzzle = puzzle;
         this.state.solution = solution;
         this.state.cages = cages;
