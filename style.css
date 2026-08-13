@@ -6,7 +6,7 @@ body.loaded #app { visibility: visible; }
 
 :root {
   --bg: #f5f7fa; --board-bg: #fff; --border: #888; --box-border: #333;
-  --cell-bg: #fff; --cell-hover: #e0e7ff; --selected: #61b8ff;
+  --cell-bg: #fff; --cell-hover: #e0e7ff; --selected: #7bbff8;
   --given: #1a237e; --user: #0055cc; --note: #666;
   --btn: #2196f3; --btn-hover: #1976d2; --text: #222;
   --safe-area-top: env(safe-area-inset-top, 0px); --safe-area-bottom: env(safe-area-inset-bottom, 0px);
