@@ -834,6 +834,18 @@ window.Game = {
             }
         }
 
+        const currentCage = this.state.cages.find(cage => 
+            cage.cells.some(cell => cell.r === r && cell.c === c)
+        );
+
+        if (currentCage) {
+            for (const cell of currentCage.cells) {
+                if (this.state.playerBoard[cell.r][cell.c] === 0) {
+                    this.state.notes[cell.r][cell.c] = this.state.notes[cell.r][cell.c].filter(n => n !== digit);
+                }
+            }
+        }
+
         this.renderBoard();
         this.saveGameState();
         this.checkWin();
@@ -918,6 +930,17 @@ window.Game = {
                     for (let col = startCol; col < startCol + 3; col++) {
                         if (this.state.playerBoard[row][col] === 0) {
                             this.state.notes[row][col] = this.state.notes[row][col].filter(n => n !== placedDigit);
+                        }
+                    }
+                }
+                const currentCage = this.state.cages.find(cage => 
+                    cage.cells.some(cell => cell.r === targetR && cell.c === targetC)
+                );
+
+                if (currentCage) {
+                    for (const cell of currentCage.cells) {
+                        if (this.state.playerBoard[cell.r][cell.c] === 0) {
+                            this.state.notes[cell.r][cell.c] = this.state.notes[cell.r][cell.c].filter(n => n !== placedDigit);
                         }
                     }
                 }

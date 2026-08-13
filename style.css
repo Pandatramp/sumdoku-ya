@@ -16,7 +16,7 @@ body.loaded #app { visibility: visible; }
 }
 body.dark-theme {
   --bg: #050523; --board-bg: #141428; --border: #341a7d; --box-border: #3a3873;
-  --cell-bg: #010115; --cell-hover: #1a4a7a; --selected: #274e5a;
+  --cell-bg: #010115; --cell-hover: #1a4a7a; --selected: #3f7e93;
   --given: #4fc3f7; --user: #81d4fa; --note: #90a4ae; --text: #e0e0e0;
   --hl-row: #010344; --hl-col: #010344; --hl-box: #010344; --hl-num: #274e5a;
   --hl-cage: #311343;   /* ✅ ДОБАВИТЬ — тёмно-фиолетовый для клетки */
