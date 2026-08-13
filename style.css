@@ -15,10 +15,10 @@ body.loaded #app { visibility: visible; }
   --hl-cage: #f3e5f5;   /* ✅ ДОБАВИТЬ — светло-сиреневый для клетки */
 }
 body.dark-theme {
-  --bg: #050523; --board-bg: #141428; --border: #341a7d; --box-border: #3a3873;
-  --cell-bg: #010115; --cell-hover: #1a4a7a; --selected: #3f7e93;
+  --bg: #050523; --board-bg: #141428; --border: #301872; --box-border: #423f80;
+  --cell-bg: #02022e; --cell-hover: #1a4a7a; --selected: #0f3d7d;
   --given: #4fc3f7; --user: #81d4fa; --note: #90a4ae; --text: #e0e0e0;
-  --hl-row: #010344; --hl-col: #010344; --hl-box: #010344; --hl-num: #274e5a;
+  --hl-row: #000046; --hl-col: #000046; --hl-box: #000046; --hl-num: #082a5e;
   --hl-cage: #311343;   /* ✅ ДОБАВИТЬ — тёмно-фиолетовый для клетки */
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
