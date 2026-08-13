@@ -148,7 +148,7 @@ body.dark-theme .cage-border-indicator.cage-border-top,
 body.dark-theme .cage-border-indicator.cage-border-right,
 body.dark-theme .cage-border-indicator.cage-border-bottom,
 body.dark-theme .cage-border-indicator.cage-border-left {
-  border-color: #747474;
+  border-color: #4a4a4a;
 }
 .cell:nth-child(9n) { border-right: none; }
 .cell:nth-child(n+73) { border-bottom: none; }
